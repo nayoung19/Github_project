@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecommenderSystem</title>
+</head>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+</script>
+<style>
+    header{
+       margin:0px;
+       padding: 10px;
+       width: 1500px;
+       height: 70px;
+       background-color: rgb(226, 115, 134);
+       line-height: 50px;
+       border: 1px solid;
+       float: inline-start;
+    }
+    footer{
+        margin:0px;
+        padding-left: 20px;
+        width: 1500px;
+        height: 70px;
+        background-color: rgb(250, 234, 236);
+        line-height: 50px;
+        float: inline-end;
+    }
+    #sys_title{
+        margin: 0px;
+        font-size: 30px;
+        color: rgb(44, 39, 39);
+    }
+    .main{
+        height: 790px;
+        width: 1521px;
+        border: 1px solid rgb(169, 168, 165);
+        background-color: rgb(249, 249, 253);
+    }
+    .left{
+        width: 30%;
+        padding-top: 20px;
+        float: left;
+    }
+    .right{
+        width: 70%;
+        padding-top: 20px;
+        float: left;
+    }
+    .input,.list{
+        margin: auto;
+        width: 80%;
+        height: 600px;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 30px;
+    }
+    label{
+        font-size: 20px;
+    }
+    input[type=text],select{
+        width: 100%;
+        padding: 12px 20px;
+        margin: 10px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: medium;
+    }
+    textarea{
+        width: 100%;
+        height: 150px;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: medium;
+    }
+    input[type=submit] {
+         width: 100%;
+         background-color: #4CAF50;
+         color: white;
+         padding: 14px 20px;
+         margin: 5px 0px;
+         margin-top: 25px;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+         font-size: large;
+    }
+
+    input[type=submit]:hover {
+         background-color: #e55180;
+    }
+    #result {
+         width: 80%
+    }
+    td{
+         padding: 10px
+    }
+</style>
+<body>
+    <header>
+      <p id='sys_title'>开发者推荐系统</p>
+    </header>
+    <div class="main">
+        <div class='left'>
+            <form class = 'input' action="http://127.0.0.1:5000/result" method="post">
+                <label for="lan">Language:</label>
+                <select id='lan' name='lan'>
+                    <option value="Objective-C">Objective-C</option>
+                    <option value="Clojure">Clojure</option>
+                    <option value="Java">Java</option>
+                    <option value="Go">Go</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Swift">Swift</option>
+                </select>
+                <label for="title">Title:</label>
+                <input id='title' name = 'title' type="text" placeholder="Please enter issue title...">
+                <label for="body">Body:</label>
+                <textarea id='body' name = 'body'  placeholder="Please enter issue body..."></textarea>
+                <label for="topic">Description:</label>
+                <textarea id='topic' name = 'topic' placeholder="Please enter program description..."></textarea>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div class="right">
+            <div class="table">
+            <table id="result" border="1px">
+             <tr>
+              <th>ID</th>
+              <th>NAME</th>
+              <th>EMAIL</th>
+              <th>LOCATION</th>
+              <th>HOMEPAGE</th>
+              <th>RESEMBLENCE</th>
+              <th>LEVEL</th>
+              </tr>
+              {% for user in result %}
+              <tr>
+               <td>{{user['id']}}</td>
+               <td>{{user['name']}}</td>
+               <td>{{user['email']}}</td>
+               <td>{{user['location']}}</td>
+               <td><a href="{{user['homepage']}}"></a>{{user['homepage']}}</td>
+               <td>{{user['resemblence']}}</td>
+               <td>{{user['level']}}</td>
+              </tr>
+              {% endfor %}
+             </table>
+             </div>
+        </div>
+    </div>
+<!--    <footer>-->
+<!--        @na-->
+<!--    </footer>-->
+<script>
+</script>
+</body>
+</html>
